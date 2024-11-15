@@ -27,9 +27,11 @@ components:
         option java_package = "xx.xx.xx.sample";
         option java_outer_classname = "TrainRunContainerProtobuf";
 
+        // @RootNode
         message TrainRunContainerMsg {
             TrainRunMsg train_run = 1;
             repeated TimetableEventMsg timetable_events = 2;
+            CompositionMsg composition = 3;
         }
 
         message TrainRunMsg {
@@ -37,10 +39,20 @@ components:
             int32 id = 1;
             string trasse_id = 2;
             google.type.Date betriebstag = 3;
+            /*
+             * The train number
+             * @Example SBB-612-1
+             * @Example SOB-13234-2
+             */
             string zugnummer = 4;
             string infrastruktur_netz = 5;
             PeriodMsg object_period = 6;
+            /*
+             * @Example { "seconds": 1706685920, "nanos": 0 }
+             * @Default { "seconds": 946681200, "nanos": 0 }
+             */
             google.protobuf.Duration dr = 7;
+            CompositionMsg composition = 8;
         }
 
         message PeriodMsg {
